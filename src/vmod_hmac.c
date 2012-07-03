@@ -40,7 +40,6 @@ int
 main(int argc, const char *argv[])
 {
 	const char *key, *data;
-	int key_len, data_len;
 	char *h[4];
 	int i, e;
 
@@ -51,8 +50,6 @@ main(int argc, const char *argv[])
 
 	key = argv[1];
 	data = argv[2];
-	key_len = strlen(key);
-	data_len = strlen(data);
 
 	h[0] = hmac_sha1(key, data, encode_hex);
 	h[1] = hmac_sha1(key, data, encode_base64);
@@ -121,7 +118,6 @@ hmac(const EVP_MD *md,
 	unsigned char digest[EVP_MAX_MD_SIZE];
 	char *h = NULL;
 	unsigned int len = 0;
-
 
 	HMAC_CTX_init(&ctx);
 	HMAC_CTX_set_flags(&ctx, EVP_MD_CTX_FLAG_ONESHOT);
