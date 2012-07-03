@@ -1,0 +1,6 @@
+Module hmac
+Init vmod_hmac_init
+Function STRING sha1_hex(STRING, STRING)
+Function STRING sha1_base64(STRING, STRING)
+Function STRING sha256_hex(STRING, STRING)
+Function STRING sha256_base64(STRING, STRING)

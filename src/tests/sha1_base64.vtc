@@ -1,0 +1,22 @@
+varnishtest "Test hmac vmod, SHA-1 + Base64"
+
+server s1 {
+	rxreq
+	txresp
+} -start
+
+varnish v1 -vcl+backend {
+	import hmac from "${vmod_topbuild}/src/.libs/libvmod_hmac.so";
+
+	sub vcl_deliver {
+		set resp.http.hmac = hmac.sha1_base64("Hello", "World");
+	}
+} -start
+
+client c1 {
+	txreq -url "/"
+	rxresp
+	expect resp.http.hmac == "ninPbUiQSZ74WjFHVXsaRdWu0Xc="
+}
+
+client c1 -run
