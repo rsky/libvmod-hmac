@@ -122,7 +122,7 @@ In your VCL you could then use this vmod along the following lines::
         import hmac;
 
         sub vcl_deliver {
-                # This sets resp.http.hmac to "Hello, World"
+                # This sets resp.http.hmac to "ninPbUiQSZ74WjFHVXsaRdWu0Xc="
                 set resp.http.hmac = hmac.sha1_base64("Hello", "World");
         }
 
