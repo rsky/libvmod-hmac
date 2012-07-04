@@ -1,11 +1,11 @@
 varnishtest "Test hmac vmod, SHA-1 + Hex"
 
-server s2 {
+server s1 {
 	rxreq
 	txresp
 } -start
 
-varnish v2 -vcl+backend {
+varnish v1 -vcl+backend {
 	import hmac from "${vmod_topbuild}/src/.libs/libvmod_hmac.so";
 
 	sub vcl_deliver {
@@ -13,10 +13,10 @@ varnish v2 -vcl+backend {
 	}
 } -start
 
-client c2 {
+client c1 {
 	txreq -url "/"
 	rxresp
 	expect resp.http.hmac == "9e29cf6d4890499ef85a3147557b1a45d5aed177"
 }
 
-client c2 -run
+client c1 -run
